@@ -283,7 +283,7 @@ const App = {
       </section>
 
       <!-- Career Tips Section -->
-      <section class="section-features" style="padding-top: 0;">
+      <section class="section-features" id="careerTipsSection" style="padding-top: 0; scroll-margin-top: 140px;">
         <h2 class="section-title">Tips Karier & Artikel Terkini</h2>
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
           ${CAREER_ARTICLES.map(art => `
@@ -328,7 +328,7 @@ const App = {
             </ul>
           </div>
           <div>
-            <h5 style="font-size: 0.95rem; color: #172554; margin-bottom: 14px;">Tentang JOBREADY</h5>
+            <h5 id="aboutSection" style="font-size: 0.95rem; color: #172554; margin-bottom: 14px; scroll-margin-top: 140px;">Tentang JOBREADY</h5>
             <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.88rem; color: #64748B;">
               <li>Tentang Perusahaan</li>
               <li>Pusat Bantuan</li>
@@ -1355,6 +1355,11 @@ const App = {
     if (!input) return;
     this.searchQuery = input.value;
     this.navigate('jobs');
+  },
+
+  scrollToLandingSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) section.scrollIntoView({ behavior: 'auto', block: 'start' });
   },
 
   quickSearch(keyword) {
