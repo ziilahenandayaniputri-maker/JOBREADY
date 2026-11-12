@@ -87,14 +87,12 @@ const App = {
     const auth = StorageService.getAuth();
     const isLanding = this.currentView === 'landing';
 
-    const topMetaBar = document.getElementById('topMetaBar');
     const landingNav = document.getElementById('landingNav');
     const appContainer = document.getElementById('appContainer');
     const appSidebar = document.getElementById('appSidebar');
     const appHeader = document.getElementById('appHeader');
 
     if (isLanding) {
-      if (topMetaBar) topMetaBar.style.display = 'flex';
       if (landingNav) landingNav.style.display = 'flex';
       if (appSidebar) appSidebar.style.display = 'none';
       if (appHeader) appHeader.style.display = 'none';
@@ -129,7 +127,6 @@ const App = {
       }
     } else {
       // In Dashboard / App Shell
-      if (topMetaBar) topMetaBar.style.display = 'none';
       if (landingNav) landingNav.style.display = 'none';
       if (appSidebar) appSidebar.style.display = 'flex';
       if (appHeader) appHeader.style.display = 'flex';

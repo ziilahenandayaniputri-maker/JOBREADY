@@ -102,59 +102,6 @@ button, input, select, textarea {
 }
 
 /* ========================================================
-   Top Meta Bar (Matching Image Reference top header)
-   ======================================================== */
-.top-meta-bar {
-  background-color: #FFFFFF;
-  border-bottom: 1px solid var(--border);
-  padding: 8px 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-.top-meta-left {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.top-meta-left .tag {
-  background: var(--primary-light);
-  color: var(--primary);
-  font-weight: 600;
-  padding: 2px 10px;
-  border-radius: var(--radius-full);
-  font-size: 0.8rem;
-}
-
-.top-meta-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.meta-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background-color: #F1F5F9;
-  padding: 4px 14px;
-  border-radius: var(--radius-full);
-  font-weight: 500;
-  color: var(--navy-dark);
-  font-size: 0.8rem;
-  transition: all var(--transition-fast);
-}
-
-.meta-pill:hover {
-  background-color: var(--primary-light);
-  color: var(--primary);
-}
-
-/* ========================================================
    Landing Page Navigation
    ======================================================== */
 .landing-nav {

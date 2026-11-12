@@ -1035,9 +1035,6 @@
   #mobileMenuBtn {
     display: inline-flex !important;
   }
-  .top-meta-bar {
-    display: none;
-  }
   .app-sidebar {
     transform: translateX(-100%);
   }

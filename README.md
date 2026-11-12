@@ -21,7 +21,6 @@ JOBREADY adalah platform modern, responsif, dan interaktif yang dirancang khusus
 
 ### 1. Landing Page
 - **Navigation Bar:** Logo JOBREADY, navigasi (Beranda, Lowongan, Tips Karier, Tentang), dan aksi autentikasi.
-- **Top Meta Bar:** Tagline & 3 pilar fitur (*Cari Lowongan dengan Mudah*, *Lacak Status Lamaran*, *Bangun Karier Lebih Baik*).
 - **Hero Section:** Headline informatif, search bar interaktif, tag pencarian cepat, serta ilustrasi vektor pencari kerja profesional.
 - **Mengapa JOBREADY?:** 4 card keunggulan (Lowongan Terpercaya, Proses Melamar Mudah, Notifikasi Real-Time, Dukungan Karier).
 - **Lowongan & Tips Karier:** Jelajahi dan cari semua lowongan langsung dari landing page, baca artikel persiapan karier, dan buka detail pekerjaan tanpa meninggalkan halaman.
