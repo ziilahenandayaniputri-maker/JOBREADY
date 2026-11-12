@@ -60,7 +60,7 @@ JOBREADY adalah platform modern, responsif, dan interaktif yang dirancang khusus
   - 🔴 **Ditolak** (Merah)
   - 🔵 **Terkirim** (Biru)
 - **Recruitment Timeline:** Visualisasi 4 tahapan rekrutmen (Lamaran Dikirim &rarr; Seleksi Berkas &rarr; Wawancara &rarr; Keputusan Akhir).
-- **Simulasi Perubahan Status:** Tombol khusus untuk mendemonstrasikan perubahan status lamaran secara instan dan memicu notifikasi real-time!
+- Status lamaran ditampilkan sebagai informasi untuk pelamar; pelamar tidak dapat mengubah statusnya sendiri.
 
 ### 7. Profil Pengguna
 - Foto avatar profil *Alvin*, nama, headline, dan bio.

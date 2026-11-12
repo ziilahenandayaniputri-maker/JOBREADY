@@ -236,53 +236,6 @@ const StorageService = {
     return { success: true, application: newApp };
   },
 
-  updateApplicationStatus(appId, newStatus) {
-    const apps = this.getApplications();
-    const appIndex = apps.findIndex(a => a.id === appId);
-    if (appIndex === -1) return false;
-
-    const app = apps[appIndex];
-    app.status = newStatus;
-    const todayStr = new Intl.DateTimeFormat('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }).format(new Date());
-
-    // Update timeline based on status
-    if (newStatus === 'Dalam Proses') {
-      app.timeline[0].status = 'done';
-      app.timeline[1].status = 'current';
-      app.timeline[1].date = todayStr;
-      app.timeline[1].note = 'Sedang dalam peninjauan oleh tim Talent Acquisition.';
-    } else if (newStatus === 'Wawancara') {
-      app.timeline[0].status = 'done';
-      app.timeline[1].status = 'done';
-      app.timeline[2].status = 'current';
-      app.timeline[2].date = todayStr;
-      app.timeline[2].note = 'Undangan wawancara teknis dan cultural fit telah dijadwalkan.';
-    } else if (newStatus === 'Diterima') {
-      app.timeline[0].status = 'done';
-      app.timeline[1].status = 'done';
-      app.timeline[2].status = 'done';
-      app.timeline[3].status = 'done';
-      app.timeline[3].date = todayStr;
-      app.timeline[3].note = 'Selamat! Anda diterima dan penawaran kerja (Offering Letter) telah diterbitkan.';
-    } else if (newStatus === 'Ditolak') {
-      app.timeline[0].status = 'done';
-      app.timeline[app.timeline.length - 1].status = 'rejected';
-      app.timeline[app.timeline.length - 1].date = todayStr;
-      app.timeline[app.timeline.length - 1].note = 'Terima kasih atas partisipasi Anda. Saat ini kualifikasi belum memenuhi kebutuhan posisi ini.';
-    }
-
-    apps[appIndex] = app;
-    localStorage.setItem(STORAGE_KEYS.APPLICATIONS, JSON.stringify(apps));
-
-    this.addNotification({
-      title: `Status Lamaran: ${newStatus}`,
-      message: `Status lamaran untuk ${app.title} di ${app.company} kini menjadi "${newStatus}".`,
-      type: newStatus === 'Diterima' ? 'success' : newStatus === 'Ditolak' ? 'danger' : 'warning'
-    });
-
-    return true;
-  },
-
   // Notifications
   getNotifications() {
     try {

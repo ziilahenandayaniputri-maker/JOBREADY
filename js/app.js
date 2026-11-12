@@ -652,17 +652,9 @@ const App = {
     const rejectedCount = apps.filter(a => a.status === 'Ditolak').length;
 
     return `
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
-        <div class="page-title-group" style="margin-bottom:0;">
-          <h2>Lamaran Saya</h2>
-          <p>Pantau status dan perkembangan setiap lamaran pekerjaanmu secara real-time.</p>
-        </div>
-        <div style="display: flex; gap: 10px;">
-          <button class="btn btn-secondary btn-sm" onclick="App.openSimulationModal()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
-            <span>Simulasi Perubahan Status</span>
-          </button>
-        </div>
+      <div class="page-title-group" style="margin-bottom: 24px;">
+        <h2>Lamaran Saya</h2>
+        <p>Pantau status dan perkembangan setiap lamaran pekerjaanmu secara real-time.</p>
       </div>
 
       <!-- Filter Tabs Matching Mockup -->
@@ -747,7 +739,6 @@ const App = {
           <!-- Actions Bar -->
           <div class="app-actions-bar">
             <button class="btn btn-outline btn-sm" onclick="App.openJobDetail('${app.jobId}')">Lihat Lowongan</button>
-            <button class="btn btn-secondary btn-sm" onclick="App.quickChangeStatusPrompt('${app.id}')">Ubah Status</button>
           </div>
         </div>
       `;
@@ -1098,47 +1089,6 @@ const App = {
       this.navigate('tracking');
     } else {
       this.showToast(result.message || 'Gagal mengirim lamaran.', 'warning');
-    }
-  },
-
-  // ==========================================
-  // STATUS SIMULATION MODAL
-  // ==========================================
-
-  openSimulationModal() {
-    const apps = StorageService.getApplications();
-    const modal = document.getElementById('simulationModal');
-    const selectEl = document.getElementById('simAppSelect');
-
-    selectEl.innerHTML = apps.map(a => `
-      <option value="${a.id}">${a.title} - ${a.company} (Saat ini: ${a.status})</option>
-    `).join('');
-
-    modal.classList.add('active');
-  },
-
-  quickChangeStatusPrompt(appId) {
-    const modal = document.getElementById('simulationModal');
-    const selectEl = document.getElementById('simAppSelect');
-    this.openSimulationModal();
-    if (selectEl) selectEl.value = appId;
-  },
-
-  submitSimulation(event) {
-    event.preventDefault();
-    const appId = document.getElementById('simAppSelect').value;
-    const newStatus = document.getElementById('simStatusSelect').value;
-
-    const ok = StorageService.updateApplicationStatus(appId, newStatus);
-    this.closeAllModals();
-
-    if (ok) {
-      this.showToast(`Status lamaran berhasil diperbarui menjadi "${newStatus}"!`, 'success');
-      if (this.currentView === 'tracking') {
-        this.renderTrackingList();
-      } else {
-        this.render();
-      }
     }
   },
 
