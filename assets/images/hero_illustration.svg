@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="100" y1="50" x2="500" y2="450" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EFF6FF"/>
+      <stop offset="1" stop-color="#DBEAFE"/>
+    </linearGradient>
+    <linearGradient id="suitGrad" x1="280" y1="200" x2="450" y2="450" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E40AF"/>
+      <stop offset="1" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <linearGradient id="laptopGrad" x1="300" y1="300" x2="420" y2="380" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E293B"/>
+      <stop offset="1" stop-color="#334155"/>
+    </linearGradient>
+    <filter id="softShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#1E3A8A" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background decorative organic blobs -->
+  <path d="M120 220C90 120 200 40 320 50C440 60 520 150 510 270C500 390 410 460 290 450C170 440 150 320 120 220Z" fill="url(#bgGrad)" opacity="0.8"/>
+  <circle cx="100" cy="140" r="14" fill="#93C5FD" opacity="0.6"/>
+  <circle cx="530" cy="180" r="10" fill="#60A5FA" opacity="0.5"/>
+  <circle cx="480" cy="90" r="6" fill="#3B82F6" opacity="0.6"/>
+  <circle cx="140" cy="400" r="8" fill="#93C5FD" opacity="0.5"/>
+
+  <!-- City Skyline Silhouette in light blue -->
+  <g fill="#BFDBFE" opacity="0.65">
+    <rect x="180" y="240" width="40" height="160" rx="3"/>
+    <rect x="225" y="210" width="35" height="190" rx="3"/>
+    <rect x="265" y="270" width="45" height="130" rx="3"/>
+    <rect x="420" y="220" width="50" height="180" rx="3"/>
+    <rect x="475" y="260" width="40" height="140" rx="3"/>
+    <rect x="145" y="290" width="30" height="110" rx="3"/>
+    <!-- Small windows -->
+    <rect x="190" y="260" width="6" height="8" rx="1" fill="#EFF6FF"/>
+    <rect x="204" y="260" width="6" height="8" rx="1" fill="#EFF6FF"/>
+    <rect x="190" y="280" width="6" height="8" rx="1" fill="#EFF6FF"/>
+    <rect x="204" y="280" width="6" height="8" rx="1" fill="#EFF6FF"/>
+    <rect x="235" y="230" width="6" height="8" rx="1" fill="#EFF6FF"/>
+    <rect x="245" y="230" width="6" height="8" rx="1" fill="#EFF6FF"/>
+    <rect x="235" y="250" width="6" height="8" rx="1" fill="#EFF6FF"/>
+    <rect x="245" y="250" width="6" height="8" rx="1" fill="#EFF6FF"/>
+  </g>
+
+  <!-- Floating Briefcase with Glow -->
+  <g filter="url(#softShadow)" transform="translate(180, 110)">
+    <rect x="0" y="10" width="56" height="42" rx="10" fill="#2563EB"/>
+    <path d="M18 10V5C18 3.34315 19.3431 2 21 2H35C36.6569 2 38 3.34315 38 5V10" stroke="#2563EB" stroke-width="4" stroke-linecap="round"/>
+    <path d="M0 24H56" stroke="#1D4ED8" stroke-width="3"/>
+    <rect x="24" y="21" width="8" height="7" rx="2" fill="#FFFFFF"/>
+  </g>
+
+  <!-- Person (Job Seeker holding laptop) -->
+  <g filter="url(#softShadow)">
+    <!-- Body / Torso & Suit -->
+    <path d="M300 480C295 380 320 310 375 285L395 285C450 310 475 380 470 480H300Z" fill="url(#suitGrad)"/>
+    <!-- White Inner Shirt / Tie -->
+    <path d="M365 285L385 345L405 285Z" fill="#FFFFFF"/>
+    <path d="M380 300L385 360L390 300Z" fill="#2563EB"/>
+    <!-- Suit Lapels -->
+    <path d="M355 285L385 365L370 380L340 310Z" fill="#1E3A8A"/>
+    <path d="M415 285L385 365L400 380L430 310Z" fill="#1E3A8A"/>
+
+    <!-- Neck -->
+    <rect x="372" y="250" width="26" height="38" rx="6" fill="#FBD3B6"/>
+
+    <!-- Head -->
+    <ellipse cx="385" cy="210" rx="30" ry="36" fill="#FCD9BD"/>
+    <!-- Ears -->
+    <circle cx="355" cy="215" r="7" fill="#FBD3B6"/>
+    <circle cx="415" cy="215" r="7" fill="#FBD3B6"/>
+
+    <!-- Hair -->
+    <path d="M352 195C352 165 370 155 385 155C410 155 422 170 422 195C422 185 415 175 388 175C365 175 355 185 352 195Z" fill="#0F172A"/>
+    <path d="M352 195C352 215 356 220 357 220C358 210 360 195 365 190C375 180 395 180 415 188C418 195 419 210 420 220C421 220 423 215 422 195C422 165 405 152 385 152C365 152 352 170 352 195Z" fill="#0F172A"/>
+
+    <!-- Facial Features -->
+    <ellipse cx="373" cy="208" rx="3" ry="4" fill="#0F172A"/>
+    <ellipse cx="397" cy="208" rx="3" ry="4" fill="#0F172A"/>
+    <circle cx="374" cy="207" r="1.2" fill="#FFFFFF"/>
+    <circle cx="398" cy="207" r="1.2" fill="#FFFFFF"/>
+    <path d="M368 200C372 198 377 199 380 202" stroke="#0F172A" stroke-width="2" stroke-linecap="round"/>
+    <path d="M390 202C393 199 398 198 402 200" stroke="#0F172A" stroke-width="2" stroke-linecap="round"/>
+    <path d="M385 210V220C385 221 383 222 382 222" stroke="#E5A687" stroke-width="2" stroke-linecap="round"/>
+    <path d="M376 228C380 234 390 234 394 228" stroke="#BE123C" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Arms & Laptop -->
+    <!-- Left arm holding laptop base -->
+    <path d="M320 330C295 350 285 390 320 410L350 400" stroke="#1D4ED8" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Hands -->
+    <ellipse cx="330" cy="405" rx="10" ry="8" fill="#FCD9BD"/>
+
+    <!-- Right arm holding laptop lid/base -->
+    <path d="M450 330C475 355 465 395 430 405L400 400" stroke="#1D4ED8" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+    <ellipse cx="430" cy="405" rx="10" ry="8" fill="#FCD9BD"/>
+
+    <!-- Sleek Laptop open -->
+    <g transform="translate(305, 320)">
+      <!-- Screen lid -->
+      <polygon points="10,65 110,65 95,0 25,0" fill="url(#laptopGrad)"/>
+      <polygon points="14,62 106,62 92,4 28,4" fill="#0EA5E9" opacity="0.9"/>
+      <!-- Screen content lines -->
+      <line x1="38" y1="20" x2="82" y2="20" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+      <line x1="42" y1="32" x2="78" y2="32" stroke="#BAE6FD" stroke-width="2" stroke-linecap="round"/>
+      <line x1="40" y1="44" x2="70" y2="44" stroke="#BAE6FD" stroke-width="2" stroke-linecap="round"/>
+      <!-- Keyboard Base -->
+      <polygon points="0,65 120,65 135,85 -15,85" fill="#475569"/>
+      <polygon points="10,68 110,68 122,82 -2,82" fill="#334155"/>
+      <!-- Trackpad -->
+      <rect x="48" y="72" width="24" height="8" rx="2" fill="#1E293B"/>
+    </g>
+  </g>
+
+  <!-- Sparkles and stars -->
+  <g fill="#F59E0B">
+    <path d="M170 80L172 88L180 90L172 92L170 100L168 92L160 90L168 88Z"/>
+    <path d="M470 340L471 346L477 348L471 350L470 356L469 350L463 348L469 346Z"/>
+    <path d="M260 170L261 174L265 175L261 176L260 180L259 176L255 175L259 174Z"/>
+  </g>
+</svg>

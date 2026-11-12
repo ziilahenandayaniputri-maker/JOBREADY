@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" fill="none">
+  <!-- Briefcase Icon -->
+  <g transform="translate(4, 6)">
+    <!-- Briefcase handle -->
+    <path d="M18 16V10C18 7.79086 19.7909 6 22 6H30C32.2091 6 34 7.79086 34 10V16" stroke="#60A5FA" stroke-width="4" stroke-linecap="round"/>
+    <!-- Briefcase body -->
+    <rect x="4" y="14" width="44" height="34" rx="8" fill="#3B82F6"/>
+    <!-- Accent lock / strip -->
+    <path d="M4 26H48" stroke="#1D4ED8" stroke-width="3"/>
+    <rect x="22" y="23" width="8" height="7" rx="2" fill="#FFFFFF"/>
+  </g>
+  <!-- Text JOBREADY -->
+  <text x="64" y="42" font-family="'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif" font-size="30" font-weight="800" fill="#FFFFFF" letter-spacing="-0.5">JOB<tspan fill="#60A5FA">READY</tspan></text>
+</svg>
