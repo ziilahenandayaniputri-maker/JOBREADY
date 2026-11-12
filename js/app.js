@@ -15,18 +15,34 @@ const App = {
     const auth = StorageService.getAuth();
     // Keep protected routes behind login, including URLs saved before logout.
     const hash = window.location.hash.replace('#', '');
+    let showLandingJobs = false;
     if (hash && ['landing', 'dashboard', 'jobs', 'tracking', 'profile', 'settings'].includes(hash)) {
-      this.currentView = (!auth.isLoggedIn && hash !== 'landing' && hash !== 'jobs') ? 'landing' : hash;
+      const redirectToLanding = !auth.isLoggedIn && hash !== 'landing';
+      this.currentView = redirectToLanding ? 'landing' : hash;
+      if (redirectToLanding) {
+        window.location.hash = 'landing';
+        showLandingJobs = hash === 'jobs';
+      }
     } else {
       this.currentView = auth.isLoggedIn ? 'dashboard' : 'landing';
     }
 
     this.bindEvents();
     this.render();
+    if (showLandingJobs) this.scrollToLandingSection('landingJobsSection');
+    if (!auth.isLoggedIn) this.openAuthModal('login');
   },
 
   navigate(viewName) {
     const auth = StorageService.getAuth();
+    if (!auth.isLoggedIn && viewName === 'jobs') {
+      this.currentView = 'landing';
+      window.location.hash = 'landing';
+      this.render();
+      this.scrollToLandingSection('landingJobsSection');
+      return;
+    }
+
     if (!auth.isLoggedIn && (viewName === 'dashboard' || viewName === 'tracking' || viewName === 'profile' || viewName === 'settings')) {
       this.openAuthModal('login');
       this.showToast('Silakan login terlebih dahulu untuk mengakses fitur ini.', 'warning');
