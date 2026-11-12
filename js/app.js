@@ -7,6 +7,7 @@ const App = {
   activeJobFilter: 'Semua',
   activeTrackingStatus: 'Semua',
   searchQuery: '',
+  pendingApplyJobId: null,
   selectedJobForDetail: null,
   selectedJobForApply: null,
 
@@ -46,6 +47,9 @@ const App = {
     // Global ESC key to close any active modal
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
+        if (document.getElementById('authModal')?.classList.contains('active')) {
+          this.pendingApplyJobId = null;
+        }
         this.closeAllModals();
       }
     });
@@ -54,6 +58,7 @@ const App = {
     document.querySelectorAll('.modal-overlay').forEach(modal => {
       modal.addEventListener('click', (e) => {
         if (e.target === modal) {
+          if (modal.id === 'authModal') this.pendingApplyJobId = null;
           this.closeAllModals();
         }
       });
@@ -150,6 +155,7 @@ const App = {
     switch (this.currentView) {
       case 'landing':
         mainViewEl.innerHTML = this.templateLanding();
+        this.renderLandingJobs();
         break;
       case 'dashboard':
         mainViewEl.innerHTML = this.templateDashboard();
@@ -178,7 +184,11 @@ const App = {
   // ==========================================
 
   templateLanding() {
-    const featuredJobs = StorageService.getJobs().slice(0, 3);
+    const searchValue = this.searchQuery
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
     return `
       <!-- Hero Section -->
       <section class="landing-hero">
@@ -191,7 +201,7 @@ const App = {
               <span class="search-icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
               </span>
-              <input type="text" id="landingHeroSearchInput" placeholder="Cari posisi, perusahaan, atau kata kunci..." onkeypress="if(event.key==='Enter') App.handleLandingSearch()">
+              <input type="text" id="landingHeroSearchInput" value="${searchValue}" placeholder="Cari posisi, perusahaan, atau kata kunci..." oninput="App.handleLandingJobSearch(this.value)" onkeypress="if(event.key==='Enter') App.handleLandingSearch()">
               <button class="btn btn-primary" onclick="App.handleLandingSearch()">Cari</button>
             </div>
             
@@ -260,25 +270,19 @@ const App = {
       <section class="section-features" style="padding-top: 0;">
         <div class="section-header-row">
           <div>
-            <h3 style="font-size: 1.4rem;">Lowongan Unggulan Terbaru</h3>
-            <p style="color: #64748B; font-size: 0.9rem;">Peluang kerja pilihan yang sedang aktif merekrut kandidat terbaik</p>
+            <h3 style="font-size: 1.4rem;">Lowongan Kerja</h3>
+            <p style="color: #64748B; font-size: 0.9rem;">Temukan posisi yang sesuai, lihat detail, lalu lamar langsung dari halaman ini.</p>
           </div>
-          <span class="link-view-all" onclick="App.navigate('jobs')">Lihat Semua Lowongan &rarr;</span>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 16px;">
-          ${featuredJobs.map(job => `
-            <div class="stat-card" style="flex-direction: column; align-items: flex-start; cursor: pointer;" onclick="App.openJobDetail('${job.id}')">
-              <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-                <div class="company-logo-box" style="background: ${job.companyLogoBg};">${job.companyLogoText}</div>
-                <span class="badge-tag badge-primary">${job.workplace}</span>
-              </div>
-              <h4 style="font-size: 1.1rem; margin-top: 14px; color: #172554;">${job.title}</h4>
-              <p style="font-size: 0.88rem; color: #64748B;">${job.company} &bull; ${job.location}</p>
-              <div style="margin-top: 12px; font-weight: 700; color: #2563EB; font-size: 0.95rem;">${job.salary}</div>
-              <button class="btn btn-outline btn-sm" style="width: 100%; margin-top: 16px;" onclick="event.stopPropagation(); App.openJobDetail('${job.id}')">Lihat Detail</button>
+        <div id="landingJobsSection" style="scroll-margin-top: 140px;">
+          <div class="filter-bar-container" style="margin-top: 16px;">
+            <div class="search-input-field">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <input type="search" id="landingJobsSearchInput" value="${searchValue}" placeholder="Cari posisi atau perusahaan..." oninput="App.handleLandingJobSearch(this.value)">
             </div>
-          `).join('')}
+          </div>
+          <div id="landingJobsList" class="jobs-list-container"></div>
         </div>
       </section>
 
@@ -315,7 +319,7 @@ const App = {
           <div>
             <h5 style="font-size: 0.95rem; color: #172554; margin-bottom: 14px;">Untuk Pencari Kerja</h5>
             <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.88rem; color: #64748B;">
-              <li style="cursor: pointer;" onclick="App.navigate('jobs')">Eksplorasi Lowongan</li>
+              <li style="cursor: pointer;" onclick="App.scrollToLandingSection('landingJobsSection')">Eksplorasi Lowongan</li>
               <li style="cursor: pointer;" onclick="App.navigate('tracking')">Lacak Status Lamaran</li>
               <li style="cursor: pointer;" onclick="App.navigate('profile')">Buat CV ATS-Friendly</li>
               <li style="cursor: pointer;" onclick="App.showToast('Tips interview segera tersedia!', 'info')">Simulasi Wawancara</li>
@@ -536,6 +540,58 @@ const App = {
         <!-- Rendered dynamically -->
       </div>
     `;
+  },
+
+  renderLandingJobs() {
+    const container = document.getElementById('landingJobsList');
+    if (!container) return;
+
+    const query = this.searchQuery.toLowerCase().trim();
+    const jobs = StorageService.getJobs().filter(job => {
+      return !query || [job.title, job.company, job.description, job.location, job.category]
+        .some(value => value.toLowerCase().includes(query));
+    });
+
+    if (jobs.length === 0) {
+      container.innerHTML = `
+        <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:16px; padding:36px 24px; text-align:center;">
+          <h4 style="font-size:1.1rem; color:#172554;">Tidak ada lowongan yang cocok</h4>
+          <p style="color:#64748B; font-size:0.9rem; margin-top:4px;">Coba kata kunci lain.</p>
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = jobs.map(job => {
+      const isSaved = StorageService.isJobSaved(job.id);
+      return `
+        <div class="job-card-rich" onclick="App.openJobDetail('${job.id}')">
+          <div class="job-card-main-info">
+            <div class="company-logo-box" style="background:${job.companyLogoBg};">${job.companyLogoText}</div>
+            <div>
+              <div class="job-title-row">
+                <h4>${job.title}</h4>
+                ${job.isNew ? '<span class="badge-tag badge-new">Baru</span>' : ''}
+              </div>
+              <div class="job-company-name">${job.company}</div>
+              <div class="job-meta-row">
+                <span class="badge-location">${job.location}</span>
+                <span class="badge-tag badge-primary">${job.type}</span>
+                <span class="badge-tag" style="background:#F1F5F9; color:#475569;">${job.workplace}</span>
+              </div>
+            </div>
+          </div>
+          <div class="job-card-actions" onclick="event.stopPropagation()">
+            <div class="job-salary-tag">${job.salary}</div>
+            <button class="btn-icon-only" title="${isSaved ? 'Hapus dari Simpanan' : 'Simpan Lowongan'}" onclick="App.toggleSaveJob('${job.id}', event)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="${isSaved ? '#EF4444' : 'none'}" stroke="${isSaved ? '#EF4444' : 'currentColor'}" stroke-width="2"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+            </button>
+            <button class="btn btn-outline btn-sm" onclick="App.openJobDetail('${job.id}')">Detail</button>
+            <button class="btn btn-primary btn-sm" onclick="App.openApplyModal('${job.id}')">Lamar</button>
+          </div>
+        </div>
+      `;
+    }).join('');
   },
 
   renderJobsList() {
@@ -1044,16 +1100,16 @@ const App = {
   },
 
   openApplyModal(jobId) {
+    const job = StorageService.getJobById(jobId);
+    if (!job) return;
+
     const auth = StorageService.getAuth();
     if (!auth.isLoggedIn) {
       this.closeAllModals();
-      this.openAuthModal('login');
+      this.openAuthModal('login', jobId);
       this.showToast('Silakan login terlebih dahulu untuk mengirim lamaran.', 'warning');
       return;
     }
-
-    const job = StorageService.getJobById(jobId);
-    if (!job) return;
 
     this.selectedJobForApply = job;
     const user = StorageService.getUser();
@@ -1186,8 +1242,9 @@ const App = {
   // AUTHENTICATION (LOGIN & REGISTER)
   // ==========================================
 
-  openAuthModal(type) {
+  openAuthModal(type, pendingApplyJobId = null) {
     this.closeAllModals();
+    this.pendingApplyJobId = pendingApplyJobId;
     const modal = document.getElementById('authModal');
     const loginView = document.getElementById('authLoginView');
     const registerView = document.getElementById('authRegisterView');
@@ -1221,16 +1278,30 @@ const App = {
     const pass = document.getElementById('loginPassword').value;
 
     StorageService.login(email, pass);
+    const pendingApplyJobId = this.pendingApplyJobId;
+    this.pendingApplyJobId = null;
     this.closeAllModals();
     this.showToast('Berhasil masuk ke JOBREADY! Selamat datang.', 'success');
-    this.navigate('dashboard');
+    if (pendingApplyJobId) {
+      this.render();
+      this.openApplyModal(pendingApplyJobId);
+    } else {
+      this.navigate('dashboard');
+    }
   },
 
   handleQuickDemoLogin() {
     StorageService.login(INITIAL_USER.email, 'password123');
+    const pendingApplyJobId = this.pendingApplyJobId;
+    this.pendingApplyJobId = null;
     this.closeAllModals();
     this.showToast(`Berhasil masuk sebagai ${StorageService.getUser().name} (Demo Akun)!`, 'success');
-    this.navigate('dashboard');
+    if (pendingApplyJobId) {
+      this.render();
+      this.openApplyModal(pendingApplyJobId);
+    } else {
+      this.navigate('dashboard');
+    }
   },
 
   handleRegister(event) {
@@ -1246,9 +1317,16 @@ const App = {
     }
 
     StorageService.register({ name, email });
+    const pendingApplyJobId = this.pendingApplyJobId;
+    this.pendingApplyJobId = null;
     this.closeAllModals();
     this.showToast(`Selamat datang di JOBREADY, ${name}! Akun Anda telah aktif.`, 'success');
-    this.navigate('dashboard');
+    if (pendingApplyJobId) {
+      this.render();
+      this.openApplyModal(pendingApplyJobId);
+    } else {
+      this.navigate('dashboard');
+    }
   },
 
   handleLogout() {
@@ -1333,6 +1411,8 @@ const App = {
     }
     if (this.currentView === 'jobs') {
       this.renderJobsList();
+    } else if (this.currentView === 'landing') {
+      this.renderLandingJobs();
     }
   },
 
@@ -1357,17 +1437,41 @@ const App = {
     const input = document.getElementById('landingHeroSearchInput');
     if (!input) return;
     this.searchQuery = input.value;
-    this.navigate('jobs');
+    this.renderLandingJobs();
+    this.scrollToLandingSection('landingJobsSection');
+  },
+
+  handleLandingJobSearch(value) {
+    this.searchQuery = value;
+    const heroInput = document.getElementById('landingHeroSearchInput');
+    const jobsInput = document.getElementById('landingJobsSearchInput');
+    if (heroInput && heroInput.value !== value) heroInput.value = value;
+    if (jobsInput && jobsInput.value !== value) jobsInput.value = value;
+    this.renderLandingJobs();
   },
 
   scrollToLandingSection(sectionId) {
-    const section = document.getElementById(sectionId);
+    let section = document.getElementById(sectionId);
+    if (!section) {
+      this.currentView = 'landing';
+      window.location.hash = 'landing';
+      this.render();
+      section = document.getElementById(sectionId);
+    }
     if (section) section.scrollIntoView({ behavior: 'auto', block: 'start' });
+    document.querySelectorAll('.landing-nav-item').forEach(item => {
+      item.classList.toggle('active', item.dataset.nav === (sectionId === 'landingJobsSection' ? 'jobs' : 'landing'));
+    });
   },
 
   quickSearch(keyword) {
     this.searchQuery = keyword;
-    this.navigate('jobs');
+    if (this.currentView === 'landing') {
+      this.handleLandingJobSearch(keyword);
+      this.scrollToLandingSection('landingJobsSection');
+    } else {
+      this.navigate('jobs');
+    }
   },
 
   toggleMobileSidebar() {

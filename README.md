@@ -24,7 +24,7 @@ JOBREADY adalah platform modern, responsif, dan interaktif yang dirancang khusus
 - **Top Meta Bar:** Tagline & 3 pilar fitur (*Cari Lowongan dengan Mudah*, *Lacak Status Lamaran*, *Bangun Karier Lebih Baik*).
 - **Hero Section:** Headline informatif, search bar interaktif, tag pencarian cepat, serta ilustrasi vektor pencari kerja profesional.
 - **Mengapa JOBREADY?:** 4 card keunggulan (Lowongan Terpercaya, Proses Melamar Mudah, Notifikasi Real-Time, Dukungan Karier).
-- **Lowongan Unggulan & Tips Karier:** Menampilkan kurasi lowongan terbaru dan artikel persiapan karier bagi fresh graduate.
+- **Lowongan & Tips Karier:** Jelajahi dan cari semua lowongan langsung dari landing page, baca artikel persiapan karier, dan buka detail pekerjaan tanpa meninggalkan halaman.
 
 ### 2. Autentikasi (Login & Register)
 - Form Login & Register lengkap dengan validasi.
@@ -51,6 +51,7 @@ JOBREADY adalah platform modern, responsif, dan interaktif yang dirancang khusus
 ### 5. Detail Lowongan & Formulir Lamaran
 - Informasi komprehensif: Posisi, Perusahaan, Lokasi, Tipe, Gaji, Deskripsi, Kualifikasi (checklist hijau), Benefit (checklist biru), dan Profil Perusahaan.
 - Modal **Formulir Lamaran** otomatis terisi dari profil pengguna (Nama, Email, Telepon, dan lampiran CV).
+- Jika belum login saat menekan **Lamar**, pengguna diminta masuk/daftar lalu langsung kembali ke formulir lamaran untuk lowongan yang dipilih.
 - Validasi pengiriman dan notifikasi sukses otomatis.
 
 ### 6. Pelacakan Lamaran (Application Tracking)
