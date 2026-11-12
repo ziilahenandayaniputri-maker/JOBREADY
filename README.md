@@ -31,6 +31,8 @@ JOBREADY adalah platform modern, responsif, dan interaktif yang dirancang khusus
 - Tombol **Tampil/Sembunyikan Password**.
 - Opsi **Remember Me** & Lupa Password.
 - **Tombol Masuk Cepat (Demo Akun)** untuk langsung mencoba aplikasi sebagai *Alvin*.
+- Aplikasi dibuka di halaman awal dan meminta pengguna memilih Masuk atau Masuk Demo sebelum membuka dashboard.
+- Login masih simulasi sisi browser (tanpa backend atau verifikasi akun sungguhan); jangan gunakan untuk akun atau data sensitif.
 
 ### 3. Dashboard Interaktif
 - Sapaan personal (*Halo, Alvin! 👋*).

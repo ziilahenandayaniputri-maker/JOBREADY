@@ -17,8 +17,14 @@ const StorageService = {
       localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(INITIAL_USER));
     }
     if (!localStorage.getItem(STORAGE_KEYS.AUTH)) {
-      // Default to the demo user so the dashboard is immediately accessible, but user can logout/login anytime
-      localStorage.setItem(STORAGE_KEYS.AUTH, JSON.stringify({ isLoggedIn: true, email: INITIAL_USER.email }));
+      localStorage.setItem(STORAGE_KEYS.AUTH, JSON.stringify({ isLoggedIn: false, email: null }));
+    }
+    if (!localStorage.getItem('jobready_login_required_v1')) {
+      const auth = this.getAuth();
+      if (auth.isLoggedIn && auth.email === INITIAL_USER.email) {
+        this.setAuth(false, null);
+      }
+      localStorage.setItem('jobready_login_required_v1', 'true');
     }
     if (!localStorage.getItem(STORAGE_KEYS.JOBS)) {
       localStorage.setItem(STORAGE_KEYS.JOBS, JSON.stringify(INITIAL_JOBS));

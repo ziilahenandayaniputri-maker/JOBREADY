@@ -3,7 +3,7 @@
 // ========================================================
 
 const App = {
-  currentView: 'dashboard', // default to dashboard if logged in, or landing
+  currentView: 'landing',
   activeJobFilter: 'Semua',
   activeTrackingStatus: 'Semua',
   searchQuery: '',
@@ -12,7 +12,7 @@ const App = {
 
   init() {
     const auth = StorageService.getAuth();
-    // If not logged in, show landing; if logged in, show dashboard or landing based on url hash
+    // Keep protected routes behind login, including URLs saved before logout.
     const hash = window.location.hash.replace('#', '');
     if (hash && ['landing', 'dashboard', 'jobs', 'tracking', 'profile', 'settings'].includes(hash)) {
       this.currentView = (!auth.isLoggedIn && hash !== 'landing' && hash !== 'jobs') ? 'landing' : hash;
