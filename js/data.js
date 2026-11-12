@@ -504,20 +504,23 @@ const CAREER_ARTICLES = [
     title: '7 Rahasia Lolos CV ATS-Friendly untuk Fresh Graduate 2025',
     category: 'Tips CV & Portofolio',
     readTime: '4 menit baca',
-    snippet: 'Pahami cara kerja sistem ATS dan buat resume yang langsung lolos tahap seleksi HR tanpa hambatan algoritma.'
+    snippet: 'Pahami cara kerja sistem ATS dan buat resume yang langsung lolos tahap seleksi HR tanpa hambatan algoritma.',
+    content: 'Gunakan format satu kolom dengan judul bagian yang jelas seperti Pengalaman, Pendidikan, dan Keahlian. Sesuaikan kata kunci dengan deskripsi lowongan secara jujur, tulis pencapaian dengan hasil yang terukur, dan hindari tabel, grafik, atau informasi penting di header dan footer. Simpan sebagai PDF yang teksnya dapat diseleksi, lalu periksa kembali sebelum mengirim.'
   },
   {
     id: 'art_002',
     title: 'Panduan Menjawab Pertanyaan Wawancara dengan Metode STAR',
     category: 'Persiapan Interview',
     readTime: '6 menit baca',
-    snippet: 'Kuasai teknik Situation, Task, Action, Result untuk menceritakan pengalamanmu secara memukau dan terstruktur.'
+    snippet: 'Kuasai teknik Situation, Task, Action, Result untuk menceritakan pengalamanmu secara memukau dan terstruktur.',
+    content: 'Situation: jelaskan konteks secara singkat. Task: ceritakan tanggung jawab atau targetmu. Action: uraikan tindakan spesifik yang kamu lakukan dan alasan memilihnya. Result: tutup dengan dampak yang bisa diukur serta pelajaran yang didapat. Gunakan contoh nyata dari magang, organisasi, kuliah, atau proyek pribadi.'
   },
   {
     id: 'art_003',
     title: 'Gaji Pertama & Negosiasi Benefit yang Tepat bagi Pemula',
     category: 'Strategi Karier',
     readTime: '5 menit baca',
-    snippet: 'Jangan takut negosiasi! Ketahui standar gaji industri, tunjangan penting, dan etika bernegosiasi secara profesional.'
+    snippet: 'Jangan takut negosiasi! Ketahui standar gaji industri, tunjangan penting, dan etika bernegosiasi secara profesional.',
+    content: 'Cari kisaran gaji untuk posisi, lokasi, dan tingkat pengalaman yang sebanding. Pertimbangkan kompensasi total seperti asuransi, bonus, tunjangan, dan pola kerja. Sampaikan ekspektasi dalam rentang yang realistis berdasarkan riset, jelaskan pertimbangannya dengan sopan, dan konfirmasikan rincian penawaran tertulis sebelum mengambil keputusan.'
   }
 ];

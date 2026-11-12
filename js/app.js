@@ -291,10 +291,13 @@ const App = {
               <span class="badge-tag" style="background:#EFF6FF; color:#2563EB;">${art.category}</span>
               <h4 style="font-size: 1.05rem; margin-top: 10px; color: #172554;">${art.title}</h4>
               <p style="font-size: 0.85rem; color: #64748B; margin-top: 8px;">${art.snippet}</p>
-              <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 14px; font-size: 0.78rem; color: #94A3B8;">
+              <div style="display: flex; align-items: center; width: 100%; margin-top: 14px; font-size: 0.78rem; color: #94A3B8;">
                 <span>${art.readTime}</span>
-                <span style="color: #2563EB; font-weight: 600; cursor: pointer;" onclick="App.showToast('Artikel lengkap dapat dibaca segera.', 'info')">Baca Selengkapnya &rarr;</span>
               </div>
+              <details style="width: 100%; margin-top: 10px; font-size: 0.85rem; color: #475569;">
+                <summary style="color: #2563EB; font-weight: 600; cursor: pointer;">Baca Selengkapnya</summary>
+                <p style="margin-top: 8px; line-height: 1.6;">${art.content}</p>
+              </details>
             </div>
           `).join('')}
         </div>
